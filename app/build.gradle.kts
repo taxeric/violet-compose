@@ -1,19 +1,19 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("com.google.devtools.ksp") version "1.9.22-1.0.17"
+    alias(libs.plugins.ksp.plugin)
 }
 
 android {
     namespace = "com.lanier.violet.compose"
-    compileSdk = 34
+    compileSdk = libs.versions.compileSdk.get().toIntOrNull()
 
     defaultConfig {
         applicationId = "com.lanier.violet.compose"
-        minSdk = 29
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        minSdk = libs.versions.minSdk.get().toIntOrNull()
+        targetSdk = libs.versions.targetSdk.get().toIntOrNull()
+        versionCode = libs.versions.versionCode.get().toIntOrNull()
+        versionName = libs.versions.versionName.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -41,7 +41,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = libs.versions.kotlinCompilerExtension.get()
     }
     packaging {
         resources {
